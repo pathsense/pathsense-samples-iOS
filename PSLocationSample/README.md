@@ -30,7 +30,7 @@
 
 # App Details to Note
 
-1. In **viewDidLoad:** we setup the PSLocationManager 
+1. In **viewDidLoad:** we set up the PSLocationManager 
     
     ```groovy
     _locationManager = [PSLocationManager new];
@@ -38,13 +38,13 @@
     [_locationManager setMaximumLatency:20];
     [_locationManager setPausesLocationUpdatesAutomatically:NO];
 	```
-2. We in the PSLocationManagerDelegate we respond to: 
+2. From the PSLocationManagerDelegate we respond to... 
 
     ```groovy
 	- (CLLocationAccuracy)psLocationManager:(PSLocationManager *)manager desiredAccuracyForActivity:(PSActivityType)activityType withConfidence:(PSActivityConfidence)confidence
 	```
 	
-    this is unique to the PSLocationManagerDelegate. From here we can check the activity and adjust our desiredAccuracy accordingly.
+    ...this is unique to the PSLocationManagerDelegate. From here we can check the activity and adjust our desiredAccuracy accordingly.
 	
     ```groovy
     CLLocationAccuracy result = [manager desiredAccuracy];
@@ -59,4 +59,5 @@
         }
     }
 	```
-      
+3. Note the use of the new accuracy type **kPSLocationAccuracyPathSenseNavigation** added by the PSLocationManager. This will set the PSLocationManager into [TruePath].(https://pathsense.com/ios mode) Also worth noting is this accuracy is only engaged if we detect driving. 
+    
