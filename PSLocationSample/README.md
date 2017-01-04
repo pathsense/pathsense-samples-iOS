@@ -42,21 +42,21 @@
 2. We respond to **psLocationManager:desiredAccuracyForActivity:withConfidence:** this is unique to the PSLocationManagerDelegate. From here we check the activity and adjust our desiredAccuracy accordingly. 
 
     ```groovy
-- (CLLocationAccuracy)psLocationManager:(PSLocationManager *)manager desiredAccuracyForActivity:(PSActivityType)activityType withConfidence:(PSActivityConfidence)confidence
-{
-	CLLocationAccuracy result = [manager desiredAccuracy];
-	if (activityType == PSActivityTypeInVehicle || activityType == PSActivityTypeInVehicleStationary) {
-    	if (result != kPSLocationAccuracyPathSenseNavigation) {
-        	result = kPSLocationAccuracyPathSenseNavigation;
+    - (CLLocationAccuracy)psLocationManager:(PSLocationManager *)manager desiredAccuracyForActivity:(PSActivityType)activityType withConfidence:(PSActivityConfidence)confidence
+    {
+        CLLocationAccuracy result = [manager desiredAccuracy];
+        if (activityType == PSActivityTypeInVehicle || activityType == PSActivityTypeInVehicleStationary) {
+            if (result != kPSLocationAccuracyPathSenseNavigation) {
+                result = kPSLocationAccuracyPathSenseNavigation;
+            }
+        
+        } else {
+            if (result != kCLLocationAccuracyBest) {
+                result = kCLLocationAccuracyBest;
+            }
         }
-    
-    } else {
-    	if (result != kCLLocationAccuracyBest) {
-        	result = kCLLocationAccuracyBest;
-        }
+        return result;
     }
-    return result;
-}
 	```
 
 3. Note the use of the new accuracy type **kPSLocationAccuracyPathSenseNavigation** added by the PSLocationManager. This will set the PSLocationManager into [TruePath](https://pathsense.com/ios) mode. Also worth noting is this accuracy is only engaged if we detect driving. 
