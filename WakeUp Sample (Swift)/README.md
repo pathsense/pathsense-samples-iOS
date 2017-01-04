@@ -10,7 +10,7 @@
 
 4. Under the Build Phases tab in your Target, click the + button on the top left and then select New Run Script Phase. Then setup the build phase as follows. Make sure this phase is below the Embed Frameworks phase:
 
-![Screenshot2](../RunScript.png?raw=true "")
+	![Screenshot2](../RunScript.png?raw=true "")
 
 5. In your AppDelegate add the following code to your **application(_:didFinishLaunchingWithOptions:)**
 
