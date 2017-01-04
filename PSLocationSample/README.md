@@ -30,7 +30,7 @@
 
 # App Details to Note
 
-1. In **viewDidLoad:** we set up the PSLocationManager 
+1. In **viewDidLoad:** we set up the [PSLocationManager](https://developer.pathsense.com/sites/pathsensedeveloperportal.dd/files/documentation/ios/sdk/location/1.2/interface_p_s_location_manager.html) 
     
     ```groovy
     _locationManager = [PSLocationManager new];
@@ -39,7 +39,7 @@
     [_locationManager setPausesLocationUpdatesAutomatically:NO];
 	```
 
-2. We respond to **psLocationManager:desiredAccuracyForActivity:withConfidence:** this is unique to the PSLocationManagerDelegate. From here we check the activity and adjust our desiredAccuracy accordingly. 
+2. We respond to **psLocationManager:desiredAccuracyForActivity:withConfidence:** this is unique to the [PSLocationManagerDelegate](https://developer.pathsense.com/sites/pathsensedeveloperportal.dd/files/documentation/ios/sdk/location/1.2/protocol_p_s_location_manager_delegate_01-p.html). From here we check the activity and adjust our desiredAccuracy accordingly. 
 
     ```groovy
     - (CLLocationAccuracy)psLocationManager:(PSLocationManager *)manager desiredAccuracyForActivity:(PSActivityType)activityType withConfidence:(PSActivityConfidence)confidence
