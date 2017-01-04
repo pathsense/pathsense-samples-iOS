@@ -15,7 +15,7 @@ You can see the additional information for each sample in their respective READM
 
 2. Make sure you are using the latest version of Xcode (8.0+) and targeting iOS 9.0 or higher.
 
-3. Add the PSLocation.framework to your Xcode project (This framework needs to be added to the Embedded Binaries).
+3. Add the PSLocation.framework to your Xcode project (This framework needs to be added to the Embedded Binaries as well).
 
 ![Screenshot1](frameworks.png?raw=true "")
 
@@ -23,3 +23,21 @@ You can see the additional information for each sample in their respective READM
 
 ![Screenshot2](RunScript.png?raw=true "")
 
+# Using Objective-C
+
+1. In your AppDelegate add the following code to your **application:didFinishLaunchingWithOptions:**
+
+	```- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+	{
+		[PSLocation setApiKey:@"your api key here" andClientID:@"your client ID"];
+    	return YES;
+	}```
+
+
+2. Make sure to include PSLocation framework headers in your AppDelegate.h file:
+
+# Using Swift 3.0
+
+1. In your AppDelegate add the following code to your **application(_:didFinishLaunchingWithOptions:)**
+
+2. Make sure to include PSLocation framework in your AppDelegate file:
