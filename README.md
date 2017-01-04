@@ -10,3 +10,11 @@ You can see the additional information for each sample in their respective READM
   - [WakeUp Sample (Swift)](...)
 
 # Enabling PSLocation in Your App
+
+1. Obtain a **Pathsense SDK Client ID** and **API Key** from [here](https://pathsense.com/). Click “GET STARTED” and enter your email address.
+
+2. Make sure you are using the latest version of Xcode (8.0+) and targeting iOS 9.0 or higher.
+
+3. Add the PSLocation.framework to your Xcode project.
+
+4. Under the Build Phases tab in your Target, click the + button on the top left and then select New Run Script Phase. Then setup the build phase as follows. Make sure this phase is below the Embed Frameworks phase:
