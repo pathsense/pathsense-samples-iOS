@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		787E990B1E1D9B5300037140 /* PSLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 787E990A1E1D9B5300037140 /* PSLocation.framework */; };
-		787E990C1E1D9B5300037140 /* PSLocation.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 787E990A1E1D9B5300037140 /* PSLocation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		78A33C1A1E01C074007BFB70 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A33C191E01C074007BFB70 /* AppDelegate.swift */; };
 		78A33C1C1E01C074007BFB70 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A33C1B1E01C074007BFB70 /* ViewController.swift */; };
 		78A33C1F1E01C074007BFB70 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78A33C1D1E01C074007BFB70 /* Main.storyboard */; };
@@ -23,7 +21,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				787E990C1E1D9B5300037140 /* PSLocation.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -31,7 +28,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		787E990A1E1D9B5300037140 /* PSLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PSLocation.framework; path = Frameworks/PSLocation.framework; sourceTree = "<group>"; };
 		78A33C161E01C074007BFB70 /* WakeUp Sample (Swift).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WakeUp Sample (Swift).app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		78A33C191E01C074007BFB70 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		78A33C1B1E01C074007BFB70 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -47,7 +43,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				787E990B1E1D9B5300037140 /* PSLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,7 +82,6 @@
 		78A33C2F1E01C142007BFB70 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				787E990A1E1D9B5300037140 /* PSLocation.framework */,
 				78A33C301E01C142007BFB70 /* MapKit.framework */,
 			);
 			name = Frameworks;
