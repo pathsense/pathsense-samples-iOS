@@ -27,6 +27,7 @@
     ```groovy
 	#import <PSLocation/PSLocation.h>
 	```
+
 # App Details to Note
 
 1. In **viewDidLoad:** we set up the [PSLocationManager](https://developer.pathsense.com/sites/pathsensedeveloperportal.dd/files/documentation/ios/sdk/location/1.2/interface_p_s_location_manager.html) 
@@ -69,11 +70,7 @@
         
         return result;
     }
-	```
-    
-    and
-    
-    ```groovy
+
     - (CLLocationAccuracy)psLocationManager:(PSLocationManager *)manager desiredAccuracyForActivity:(PSActivityType)activityType withConfidence:(PSActivityConfidence)confidence
     {
 		...
