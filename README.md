@@ -37,8 +37,24 @@ You can see the additional information for each sample in their respective READM
 
 2. Make sure to include PSLocation framework headers in your AppDelegate.h file:
 
+    ```groovy
+	#import <PSLocation/PSLocation.h>
+	```
+
 # Using Swift 3.0
 
 1. In your AppDelegate add the following code to your **application(_:didFinishLaunchingWithOptions:)**
 
+    ```groovy
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool
+    {
+        PSLocation.setApiKey("your api key here", andClientID: "your client ID")
+        return true
+    }
+	```
 2. Make sure to include PSLocation framework in your AppDelegate file:
+
+    ```groovy
+	import PSLocation
+	```
+
