@@ -30,19 +30,17 @@
 
 # App Details to Note
 
-In **viewDidLoad:** we set up the PSLocationManager 
+5. In **viewDidLoad:** we set up the PSLocationManager 
     
     _locationManager = [PSLocationManager new];
     [_locationManager setDelegate:self];
     [_locationManager setMaximumLatency:20];
     [_locationManager setPausesLocationUpdatesAutomatically:NO];
 
-From the PSLocationManagerDelegate we respond to... 
+5. From the PSLocationManagerDelegate we respond to **psLocationManager:desiredAccuracyForActivity:withConfidence:** is unique to the PSLocationManagerDelegate. From here we can check the activity and adjust our desiredAccuracy accordingly. 
 
 	- (CLLocationAccuracy)psLocationManager:(PSLocationManager *)manager desiredAccuracyForActivity:(PSActivityType)activityType withConfidence:(PSActivityConfidence)confidence
-	
-    ...this is unique to the PSLocationManagerDelegate. From here we can check the activity and adjust our desiredAccuracy accordingly.
-	
+		
     CLLocationAccuracy result = [manager desiredAccuracy];
 	if (activityType == PSActivityTypeInVehicle || activityType == PSActivityTypeInVehicleStationary) {
     	if (result != kPSLocationAccuracyPathSenseNavigation) {
@@ -55,5 +53,5 @@ From the PSLocationManagerDelegate we respond to...
         }
     }
 
-Note the use of the new accuracy type **kPSLocationAccuracyPathSenseNavigation** added by the PSLocationManager. This will set the PSLocationManager into [TruePath](https://pathsense.com/ios) mode. Also worth noting is this accuracy is only engaged if we detect driving. 
+5. Note the use of the new accuracy type **kPSLocationAccuracyPathSenseNavigation** added by the PSLocationManager. This will set the PSLocationManager into [TruePath](https://pathsense.com/ios) mode. Also worth noting is this accuracy is only engaged if we detect driving. 
     
