@@ -6,4 +6,4 @@
 
 3. Add the PSLocation.framework to your Xcode project (This framework needs to be added to the Embedded Binaries as well).
 
-![Screenshot1](pathsense-samples-ios/frameworks.png?raw=true "")
+![Screenshot1](../frameworks.png?raw=true "")
