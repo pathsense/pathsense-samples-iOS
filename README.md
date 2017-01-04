@@ -15,6 +15,8 @@ You can see the additional information for each sample in their respective READM
 
 2. Make sure you are using the latest version of Xcode (8.0+) and targeting iOS 9.0 or higher.
 
-3. Add the PSLocation.framework to your Xcode project.
+3. Add the PSLocation.framework to your Xcode project (This framework needs to be added to the Embedded Binaries).
 
 4. Under the Build Phases tab in your Target, click the + button on the top left and then select New Run Script Phase. Then setup the build phase as follows. Make sure this phase is below the Embed Frameworks phase:
+
+
