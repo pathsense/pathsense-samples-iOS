@@ -19,4 +19,5 @@ You can see the additional information for each sample in their respective READM
 
 4. Under the Build Phases tab in your Target, click the + button on the top left and then select New Run Script Phase. Then setup the build phase as follows. Make sure this phase is below the Embed Frameworks phase:
 
+![Alt text](RunScript.png?raw=true "Optional Title")
 
