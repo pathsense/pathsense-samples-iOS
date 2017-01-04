@@ -27,11 +27,11 @@ You can see the additional information for each sample in their respective READM
 
 1. In your AppDelegate add the following code to your **application:didFinishLaunchingWithOptions:**
 
-	```- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-	{
-		[PSLocation setApiKey:@"your api key here" andClientID:@"your client ID"];
-    	return YES;
-	}```
+	```- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions```
+	```{```
+		```[PSLocation setApiKey:@"your api key here" andClientID:@"your client ID"];```
+		```return YES;```
+	```}```
 
 
 2. Make sure to include PSLocation framework headers in your AppDelegate.h file:
