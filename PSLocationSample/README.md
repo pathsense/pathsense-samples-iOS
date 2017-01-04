@@ -59,5 +59,5 @@
         }
     }
 	```
-3. Note the use of the new accuracy type **kPSLocationAccuracyPathSenseNavigation** added by the PSLocationManager. This will set the PSLocationManager into [TruePath].(https://pathsense.com/ios mode) Also worth noting is this accuracy is only engaged if we detect driving. 
+3. Note the use of the new accuracy type **kPSLocationAccuracyPathSenseNavigation** added by the PSLocationManager. This will set the PSLocationManager into [TruePath](https://pathsense.com/ios) mode. Also worth noting is this accuracy is only engaged if we detect driving. 
     
