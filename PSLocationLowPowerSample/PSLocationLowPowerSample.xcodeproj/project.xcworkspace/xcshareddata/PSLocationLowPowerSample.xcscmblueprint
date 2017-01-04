@@ -1,0 +1,25 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "aad1092b-a197-1c7e-8667-ce57b7db7bff++505",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+    "aad1092b-a197-1c7e-8667-ce57b7db7bff++505" : {
+
+    }
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "aad1092b-a197-1c7e-8667-ce57b7db7bff++505" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "392D582B-7FB7-4877-AE3A-73FB914B80B9",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "aad1092b-a197-1c7e-8667-ce57b7db7bff++505" : "pathsense-samples-ios.git%20(Public_Versions)\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "PSLocationLowPowerSample",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "PSLocationLowPowerSample\/PSLocationLowPowerSample.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/pathsense\/pathsense-samples-ios.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "aad1092b-a197-1c7e-8667-ce57b7db7bff++505"
+    }
+  ]
+}
