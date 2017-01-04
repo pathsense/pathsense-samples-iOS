@@ -31,12 +31,14 @@
 # App Details to Note
 
 1. In **viewDidLoad:** we set up the [PSLocationManager](https://developer.pathsense.com/sites/pathsensedeveloperportal.dd/files/documentation/ios/sdk/location/1.2/interface_p_s_location_manager.html) 
+    
     ```groovy
     _locationManager = [PSLocationManager new];
     [_locationManager setDelegate:self];
     [_locationManager setPausesLocationUpdatesWhenDeviceIsStationary:YES];
     [_locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
 	```
+    
 2. We respond to **psLocationManager:desiredAccuracyForActivity:withConfidence:** and **cationManager:distanceFilterForActivity:withConfidence:** this is unique to the [PSLocationManagerDelegate](https://developer.pathsense.com/sites/pathsensedeveloperportal.dd/files/documentation/ios/sdk/location/1.2/protocol_p_s_location_manager_delegate_01-p.html). From here we check the activity and adjust our desiredAccuracy and distanceFilter accordingly. 
 
     ```groovy
