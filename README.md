@@ -4,8 +4,8 @@ A collection of sample applications demonstrating how to use the Pathsense iOS S
 
 You can see the additional information for each sample in their respective README files.
 
-  - [PSLocation Sample (Obj-C)](...)
-  - [PSLocation LowPower Sample (Obj-C)](...)
+  - [PSLocation Sample (Obj-C)](PSLocationSample/README.md)
+  - [PSLocation LowPower Sample (Obj-C)](PSLocationLowPowerSample/README.md)
   - [WakeUp Sample (Obj-C)](WakeUp Sample (Obj-C)/README.md)
   - [WakeUp Sample (Swift)](WakeUp Sample (Swift)/README.md)
 
