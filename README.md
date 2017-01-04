@@ -6,8 +6,8 @@ You can see the additional information for each sample in their respective READM
 
   - [PSLocation Sample (Obj-C)](...)
   - [PSLocation LowPower Sample (Obj-C)](...)
-  - [WakeUp Sample (Obj-C)](...)
-  - [WakeUp Sample (Swift)](...)
+  - [WakeUp Sample (Obj-C)](WakeUp Sample (Obj-C)/README.md)
+  - [WakeUp Sample (Swift)](WakeUp Sample (Swift)/README.md)
 
 # Enabling PSLocation in Your App
 
