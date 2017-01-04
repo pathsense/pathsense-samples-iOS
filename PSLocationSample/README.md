@@ -30,18 +30,21 @@
 
 # App Details to Note
 
-5. In **viewDidLoad:** we set up the PSLocationManager 
+1. In **viewDidLoad:** we set up the PSLocationManager 
     
+    ```groovy
     _locationManager = [PSLocationManager new];
     [_locationManager setDelegate:self];
     [_locationManager setMaximumLatency:20];
     [_locationManager setPausesLocationUpdatesAutomatically:NO];
+	```
 
-5. We respond to **psLocationManager:desiredAccuracyForActivity:withConfidence:** this is unique to the PSLocationManagerDelegate. From here we check the activity and adjust our desiredAccuracy accordingly. 
+2. We respond to **psLocationManager:desiredAccuracyForActivity:withConfidence:** this is unique to the PSLocationManagerDelegate. From here we check the activity and adjust our desiredAccuracy accordingly. 
 
-	- (CLLocationAccuracy)psLocationManager:(PSLocationManager *)manager desiredAccuracyForActivity:(PSActivityType)activityType withConfidence:(PSActivityConfidence)confidence
-		
-    CLLocationAccuracy result = [manager desiredAccuracy];
+    ```groovy
+- (CLLocationAccuracy)psLocationManager:(PSLocationManager *)manager desiredAccuracyForActivity:(PSActivityType)activityType withConfidence:(PSActivityConfidence)confidence
+{
+	CLLocationAccuracy result = [manager desiredAccuracy];
 	if (activityType == PSActivityTypeInVehicle || activityType == PSActivityTypeInVehicleStationary) {
     	if (result != kPSLocationAccuracyPathSenseNavigation) {
         	result = kPSLocationAccuracyPathSenseNavigation;
@@ -52,6 +55,9 @@
         	result = kCLLocationAccuracyBest;
         }
     }
+    return result;
+}
+	```
 
-5. Note the use of the new accuracy type **kPSLocationAccuracyPathSenseNavigation** added by the PSLocationManager. This will set the PSLocationManager into [TruePath](https://pathsense.com/ios) mode. Also worth noting is this accuracy is only engaged if we detect driving. 
+3. Note the use of the new accuracy type **kPSLocationAccuracyPathSenseNavigation** added by the PSLocationManager. This will set the PSLocationManager into [TruePath](https://pathsense.com/ios) mode. Also worth noting is this accuracy is only engaged if we detect driving. 
     
