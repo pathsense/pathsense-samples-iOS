@@ -37,7 +37,7 @@
     [_locationManager setMaximumLatency:20];
     [_locationManager setPausesLocationUpdatesAutomatically:NO];
 
-5. From the PSLocationManagerDelegate we respond to **psLocationManager:desiredAccuracyForActivity:withConfidence:** is unique to the PSLocationManagerDelegate. From here we can check the activity and adjust our desiredAccuracy accordingly. 
+5. We respond to **psLocationManager:desiredAccuracyForActivity:withConfidence:** this is unique to the PSLocationManagerDelegate. From here we check the activity and adjust our desiredAccuracy accordingly. 
 
 	- (CLLocationAccuracy)psLocationManager:(PSLocationManager *)manager desiredAccuracyForActivity:(PSActivityType)activityType withConfidence:(PSActivityConfidence)confidence
 		
