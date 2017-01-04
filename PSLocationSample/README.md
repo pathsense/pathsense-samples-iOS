@@ -26,3 +26,37 @@
 
     ```groovy
 	#import <PSLocation/PSLocation.h>
+	```
+
+# App Details to Note
+
+1. In **viewDidLoad:** we setup the PSLocationManager 
+    
+    ```groovy
+    _locationManager = [PSLocationManager new];
+    [_locationManager setDelegate:self];
+    [_locationManager setMaximumLatency:20];
+    [_locationManager setPausesLocationUpdatesAutomatically:NO];
+	```
+2. We in the PSLocationManagerDelegate we respond to: 
+
+    ```groovy
+	- (CLLocationAccuracy)psLocationManager:(PSLocationManager *)manager desiredAccuracyForActivity:(PSActivityType)activityType withConfidence:(PSActivityConfidence)confidence
+	```
+	
+    this is unique to the PSLocationManagerDelegate. From here we can check the activity and adjust our desiredAccuracy accordingly.
+	
+    ```groovy
+    CLLocationAccuracy result = [manager desiredAccuracy];
+	if (activityType == PSActivityTypeInVehicle || activityType == PSActivityTypeInVehicleStationary) {
+    	if (result != kPSLocationAccuracyPathSenseNavigation) {
+        	result = kPSLocationAccuracyPathSenseNavigation;
+        }
+    
+    } else {
+    	if (result != kCLLocationAccuracyBest) {
+        	result = kCLLocationAccuracyBest;
+        }
+    }
+	```
+      
