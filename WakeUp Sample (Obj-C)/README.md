@@ -39,3 +39,6 @@
     }
 	```
 2. In the ViewController we have a method named **startLocationManager** from this method we call the [PSLocationManager](https://developer.pathsense.com/sites/pathsensedeveloperportal.dd/files/documentation/ios/sdk/location/1.2/interface_p_s_location_manager.html) method [startMonitoringDeparture](https://developer.pathsense.com/sites/pathsensedeveloperportal.dd/files/documentation/ios/sdk/location/1.2/interface_p_s_location_manager.html#a3a43a78029a20e19655852f38f1cf4e7)
+
+3. From the method **handleButton:** we set a location to monitor for a departure by calling the the [PSLocationManager](https://developer.pathsense.com/sites/pathsensedeveloperportal.dd/files/documentation/ios/sdk/location/1.2/interface_p_s_location_manager.html) method [setDepartureCoordinate](https://developer.pathsense.com/sites/pathsensedeveloperportal.dd/files/documentation/ios/sdk/location/1.2/interface_p_s_location_manager.html#a012162887bc6d223cf5e20bddaa49cbe)
+
