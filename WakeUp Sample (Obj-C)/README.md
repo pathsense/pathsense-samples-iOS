@@ -26,3 +26,16 @@
 
     ```groovy
 	#import <PSLocation/PSLocation.h>
+	```
+
+# App Details to Note
+
+1. In **application:didFinishLaunchingWithOptions:** we check the **launchOptions** to see if we are being woken up by the os.  
+    
+    ```groovy
+    if ([launchOptions objectForKey:UIApplicationLaunchOptionsLocationKey]) {
+		ViewController *vc = (ViewController *)[[self window] rootViewController];
+    	[vc startLocationManager];
+    }
+	```
+2. In the ViewController we have a method named **startLocationManager** from this method we call the [PSLocationManager](https://developer.pathsense.com/sites/pathsensedeveloperportal.dd/files/documentation/ios/sdk/location/1.2/interface_p_s_location_manager.html) method [startMonitoringDeparture](https://developer.pathsense.com/sites/pathsensedeveloperportal.dd/files/documentation/ios/sdk/location/1.2/interface_p_s_location_manager.html)

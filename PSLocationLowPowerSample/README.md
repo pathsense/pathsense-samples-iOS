@@ -42,6 +42,34 @@
 2. We respond to **psLocationManager:desiredAccuracyForActivity:withConfidence:** and **cationManager:distanceFilterForActivity:withConfidence:** this is unique to the [PSLocationManagerDelegate](https://developer.pathsense.com/sites/pathsensedeveloperportal.dd/files/documentation/ios/sdk/location/1.2/protocol_p_s_location_manager_delegate_01-p.html). From here we check the activity and adjust our desiredAccuracy and distanceFilter accordingly. 
 
     ```groovy
+    - (CLLocationAccuracy)psLocationManager:(PSLocationManager *)manager desiredAccuracyForActivity:(PSActivityType)activityType withConfidence:(PSActivityConfidence)confidence
+    {
+		...
+        
+        CLLocationAccuracy result;
+        
+        if (activityType == PSActivityTypeInVehicle || activityType == PSActivityTypeInVehicleStationary) {
+            result = kCLLocationAccuracyBestForNavigation;
+        
+        } else if (activityType == PSActivityTypeOnBicycle || activityType == PSActivityTypeRunning) {
+            result = kCLLocationAccuracyBest;
+
+        } else if (activityType == PSActivityTypeWalking || activityType == PSActivityTypeUnknown) {
+            result = kCLLocationAccuracyNearestTenMeters;
+
+        } else if (activityType == PSActivityTypeUnknown) {
+            if (confidence > PSActivityConfidenceLow) {
+                result = [manager desiredAccuracy];
+            } else {
+                result = kCLLocationAccuracyThreeKilometers;
+            }
+        
+        } else {
+            result = kCLLocationAccuracyThreeKilometers;
+        }
+        return result;
+    }
+
     - (CLLocationDistance)psLocationManager:(PSLocationManager *)manager distanceFilterForActivity:(PSActivityType)activityType withConfidence:(PSActivityConfidence)confidence
     {
         ...     
@@ -70,34 +98,6 @@
             result = CLLocationDistanceMax;
         }
         
-        return result;
-    }
-
-    - (CLLocationAccuracy)psLocationManager:(PSLocationManager *)manager desiredAccuracyForActivity:(PSActivityType)activityType withConfidence:(PSActivityConfidence)confidence
-    {
-		...
-        
-        CLLocationAccuracy result;
-        
-        if (activityType == PSActivityTypeInVehicle || activityType == PSActivityTypeInVehicleStationary) {
-            result = kCLLocationAccuracyBestForNavigation;
-        
-        } else if (activityType == PSActivityTypeOnBicycle || activityType == PSActivityTypeRunning) {
-            result = kCLLocationAccuracyBest;
-
-        } else if (activityType == PSActivityTypeWalking || activityType == PSActivityTypeUnknown) {
-            result = kCLLocationAccuracyNearestTenMeters;
-
-        } else if (activityType == PSActivityTypeUnknown) {
-            if (confidence > PSActivityConfidenceLow) {
-                result = [manager desiredAccuracy];
-            } else {
-                result = kCLLocationAccuracyThreeKilometers;
-            }
-        
-        } else {
-            result = kCLLocationAccuracyThreeKilometers;
-        }
         return result;
     }
 	```
