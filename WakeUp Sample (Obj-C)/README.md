@@ -59,3 +59,19 @@
         [_locationManager setDepartureCoordinate:CLLocationCoordinate2DMake(33.02280304, -117.28318958)];
     }
 	```
+4. We use the [PSLocationManagerDelegate](https://developer.pathsense.com/sites/pathsensedeveloperportal.dd/files/documentation/ios/sdk/location/1.2/protocol_p_s_location_manager_delegate_01-p.html) to watch for when a departure location changes **psLocationManager:didUpdateDepartureCoordinate:** and when a departure takes place **psLocationManager:didDepartCoordinate:**.
+
+    ```groovy
+    - (void)psLocationManager:(PSLocationManager *)manager didUpdateDepartureCoordinate:(CLLocationCoordinate2D)coordinate
+    {
+        // this will be called whenever you call setDepartureCoordinate
+    }
+
+    - (void)psLocationManager:(PSLocationManager *)manager didDepartCoordinate:(CLLocationCoordinate2D)coordinate
+    {
+        // this will be called when a departure is detected -- at this point you need to start getting locations
+        // the coordinate passed in will be the coordinate that was passed to setDepartureCoordinate
+    }
+    ```
+
+
