@@ -175,8 +175,19 @@
 	if (status == kCLAuthorizationStatusNotDetermined) {
         
     } else if (status == kCLAuthorizationStatusRestricted || status == kCLAuthorizationStatusDenied) {
-        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Location Autorization" message:@"This application is not authorized to use location services!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alertView show];
+        NSString *title = NSLocalizedString(@"Location Authorization", nil);
+        NSString *message = NSLocalizedString(@"This application is not authorized to use location services!", nil);
+
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"OK", nil) style:UIAlertActionStyleCancel handler:nil]];
+
+        UIAlertAction *action = [UIAlertAction actionWithTitle:NSLocalizedString(@"Settings", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+            UIApplication *application = [UIApplication sharedApplication];
+            [application openURL:url options:@{} completionHandler:nil];
+        }];
+        [alertController addAction:action];
+        [self presentViewController:alertController animated:YES completion:nil];
         
     } else {
         [_locationManager startUpdatingLocation];
