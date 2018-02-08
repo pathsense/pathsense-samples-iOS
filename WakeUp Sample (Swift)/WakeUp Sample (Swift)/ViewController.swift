@@ -30,7 +30,33 @@ class ViewController: UIViewController, UINavigationBarDelegate, PSLocationManag
         navigationBar?.topItem?.leftBarButtonItem = barButtonItem
         barButtonItem.isEnabled = false
     }
-    
+    //----------------------------------------------------------------------------------
+    override func viewDidLayoutSubviews()
+    {
+    	super.viewDidLayoutSubviews()
+        
+    	var bounds: CGRect
+    	if #available(iOS 11.0, *) {
+     		bounds = self.view.safeAreaLayoutGuide.layoutFrame
+        } else {
+        	bounds = self.view.bounds
+         	bounds.origin.y = UIApplication.shared.statusBarFrame.size.height
+          	bounds.size.height -= bounds.origin.y
+        }
+		
+  		let r = bounds
+    	
+        var nr = navigationBar?.frame
+		nr?.origin.y = r.origin.y
+        navigationBar?.frame = nr!
+      
+        var mr = mapView?.frame
+        let y = (nr?.origin.y)! + (nr?.size.height)!
+        mr?.size.height = self.view.bounds.size.height - y
+        mr?.origin.y = y
+        mapView?.frame = mr!
+    }
+
     // MARK: -
     //----------------------------------------------------------------------------------
     func startLocationManager()
@@ -44,7 +70,7 @@ class ViewController: UIViewController, UINavigationBarDelegate, PSLocationManag
         }
     }
     //----------------------------------------------------------------------------------
-    func handleButton(sender : UIBarButtonItem)
+    @objc func handleButton(sender : UIBarButtonItem)
     {
         // FIXME: Set the location you want to monitor departures for here.
     	locationManager?.setDepartureCoordinate(CLLocationCoordinate2DMake(33.02280304, -117.28318958))
@@ -73,9 +99,10 @@ class ViewController: UIViewController, UINavigationBarDelegate, PSLocationManag
             alertController.addAction(UIAlertAction.init(title: NSLocalizedString("OK", comment: ""), style: .cancel, handler: nil))
             
             let action = UIAlertAction.init(title: NSLocalizedString("Settings...", comment: ""), style: .default, handler: { (UIAlertAction) in
-				let url = NSURL.init(string: UIApplicationOpenSettingsURLString) as! URL
-                UIApplication.shared.open(url, options: [:], completionHandler: { (Bool) in
-                })
+				if let url = URL.init(string: UIApplicationOpenSettingsURLString) {
+                    UIApplication.shared.open(url, options: [:], completionHandler: { (Bool) in
+                	})
+                }
             })
             alertController.addAction(action)
             present(alertController, animated: true, completion: {
@@ -102,6 +129,10 @@ class ViewController: UIViewController, UINavigationBarDelegate, PSLocationManag
     {
 		// this will be called whenever you call setDepartureCoordinate
 
+		if preparingMap {
+  			return
+  		}
+  		
     	mapView?.removeAnnotations((mapView?.annotations)!)
         let pt = MKPointAnnotation.init()
         pt.title = "SetLocation"
@@ -130,7 +161,7 @@ class ViewController: UIViewController, UINavigationBarDelegate, PSLocationManag
     //----------------------------------------------------------------------------------
     func mapViewDidFinishLoadingMap(_ mapView: MKMapView)
     {
-		if (preparingMap) {
+		if preparingMap {
         	navigationBar?.topItem?.leftBarButtonItem?.isEnabled = true
         }
         preparingMap = false
