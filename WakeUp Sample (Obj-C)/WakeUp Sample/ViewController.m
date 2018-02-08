@@ -33,6 +33,30 @@
     [barButtonItem setEnabled:NO];
 }
 //----------------------------------------------------------------------------------
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    
+    CGRect bounds;
+    if (@available(iOS 11.0, *)) {
+        bounds = [[[self view] safeAreaLayoutGuide] layoutFrame];
+    } else {
+        bounds = [[self view] bounds];
+        bounds.origin.y = [[UIApplication sharedApplication] statusBarFrame].size.height;
+        bounds.size.height -= bounds.origin.y;
+    }
+    CGRect r = bounds;
+
+    CGRect nr = [_navigationBar frame];
+    nr.origin.y = r.origin.y;
+    [_navigationBar setFrame:nr];
+    
+    CGRect mr = [_mapView frame];
+    mr.origin.y = nr.origin.y + nr.size.height;
+    mr.size.height = [[self view] bounds].size.height - mr.origin.y;
+    [_mapView setFrame:mr];
+}
+//----------------------------------------------------------------------------------
 - (void)handleButton:(id)sender
 {
 	#warning set the location you want to monitor departures for here
@@ -102,13 +126,18 @@
         [pt setTitle:@"Departure"];
         [pt setCoordinate:[location coordinate]];
         [_mapView addAnnotation:pt]; // this does not persist between runs of the app
+        [_mapView setCenterCoordinate:[location coordinate]]; // this does not persist between runs of the app
     }
 }
 //----------------------------------------------------------------------------------
 - (void)psLocationManager:(PSLocationManager *)manager didUpdateDepartureCoordinate:(CLLocationCoordinate2D)coordinate
 {
 	// this will be called whenever you call setDepartureCoordinate
-
+    
+    if (_preparingMap) {
+    	return;
+    }
+    
     [_mapView removeAnnotations:[_mapView annotations]];
     MKPointAnnotation *pt = [MKPointAnnotation new];
     [pt setTitle:@"SetLocation"];
