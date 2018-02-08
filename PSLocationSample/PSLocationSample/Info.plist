@@ -27,8 +27,6 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>We need GPS to demonstrate the PSLocation service.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>location</string>
@@ -55,6 +53,12 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSLocationAlwaysUsageDescription - 2</key>
+	<string>We need this to demonstrate the PSLocation service.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>We need this to demonstrate the PSLocation service.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We need this to demonstrate the PSLocation service.</string>
 	<key>NSMotionUsageDescription</key>
 	<string>We need this to demonstrate the PSLocation service.</string>
 </dict>
