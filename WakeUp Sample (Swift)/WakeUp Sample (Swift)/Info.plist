@@ -50,7 +50,7 @@
 	</array>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>This will allow &quot;WakeUp&quot; to monitor a location for departure.</string>
-	<key>NSLocationAlwaysUsageDescription - 2</key>
+	<key>NSLocationAlwaysUsageDescription</key>
 	<string>This will allow &quot;WakeUp&quot; to monitor a location for departure.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>This will allow &quot;WakeUp&quot; to monitor a location for departure.</string>
