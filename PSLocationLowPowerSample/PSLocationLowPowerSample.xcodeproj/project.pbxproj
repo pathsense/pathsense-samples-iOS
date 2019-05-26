@@ -13,6 +13,8 @@
 		786E45DB1BE9274E00EAF246 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 786E45D91BE9274E00EAF246 /* Main.storyboard */; };
 		786E45DD1BE9274E00EAF246 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 786E45DC1BE9274E00EAF246 /* Assets.xcassets */; };
 		786E45E01BE9274E00EAF246 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 786E45DE1BE9274E00EAF246 /* LaunchScreen.storyboard */; };
+		786E45E81BE9285A00EAF246 /* PSLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 786E45E71BE9285A00EAF246 /* PSLocation.framework */; };
+		786E45E91BE9285A00EAF246 /* PSLocation.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 786E45E71BE9285A00EAF246 /* PSLocation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		786E45EC1BE9287300EAF246 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 786E45EB1BE9287300EAF246 /* MapKit.framework */; };
 		78A11BCF1BE959DA00A8253C /* DataOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 78A11BC41BE959DA00A8253C /* DataOverlay.m */; };
 		78A11BD01BE959DA00A8253C /* DataOverlayRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 78A11BC61BE959DA00A8253C /* DataOverlayRenderer.m */; };
@@ -29,6 +31,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				786E45E91BE9285A00EAF246 /* PSLocation.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -46,6 +49,7 @@
 		786E45DC1BE9274E00EAF246 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		786E45DF1BE9274E00EAF246 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		786E45E11BE9274E00EAF246 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		786E45E71BE9285A00EAF246 /* PSLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PSLocation.framework; path = ../Frameworks/PSLocation.framework; sourceTree = "<group>"; };
 		786E45EB1BE9287300EAF246 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		78A11BC31BE959DA00A8253C /* DataOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataOverlay.h; sourceTree = "<group>"; };
 		78A11BC41BE959DA00A8253C /* DataOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataOverlay.m; sourceTree = "<group>"; };
@@ -67,6 +71,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				786E45EC1BE9287300EAF246 /* MapKit.framework in Frameworks */,
+				786E45E81BE9285A00EAF246 /* PSLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -118,6 +123,7 @@
 		786E45ED1BE9287D00EAF246 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				786E45E71BE9285A00EAF246 /* PSLocation.framework */,
 				786E45EB1BE9287300EAF246 /* MapKit.framework */,
 			);
 			name = Frameworks;
@@ -169,7 +175,7 @@
 		786E45C51BE9274E00EAF246 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = PathSense;
 				TargetAttributes = {
 					786E45CC1BE9274E00EAF246 = {
@@ -179,7 +185,7 @@
 			};
 			buildConfigurationList = 786E45C81BE9274E00EAF246 /* Build configuration list for PBXProject "PSLocationLowPowerSample" */;
 			compatibilityVersion = "Xcode 6.3";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
@@ -251,6 +257,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -259,12 +266,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -303,6 +312,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -311,12 +321,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -352,7 +364,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = "";
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Frameworks",
+				);
 				INFOPLIST_FILE = PSLocationLowPowerSample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.pathsense.PSLocationLowPowerSample;
@@ -368,7 +383,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = "";
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Frameworks",
+				);
 				INFOPLIST_FILE = PSLocationLowPowerSample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.pathsense.PSLocationLowPowerSample;

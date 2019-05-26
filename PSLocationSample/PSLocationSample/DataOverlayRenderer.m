@@ -15,12 +15,10 @@
 - (void)drawMapRect:(MKMapRect)mapRect zoomScale:(MKZoomScale)zoomScale inContext:(CGContextRef)ctx
 {
     if ([[UIDevice currentDevice] isMultitaskingSupported] == YES) {
-		dispatch_sync(dispatch_get_main_queue(), ^{
-            UIApplicationState applicationState = [[UIApplication sharedApplication] applicationState];
-            if (applicationState == UIApplicationStateBackground) {
-                return;
-            }
-        });
+        UIApplicationState applicationState = [[UIApplication sharedApplication] applicationState];
+        if (applicationState == UIApplicationStateBackground) {
+    		return;
+        }
     }
     
     MKMapRect theMapRect = [[self overlay] boundingMapRect];

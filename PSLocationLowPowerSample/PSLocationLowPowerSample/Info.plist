@@ -22,6 +22,8 @@
 	<string>2</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>We need GPS to demonstrate the PSLocation service.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>location</string>
@@ -49,12 +51,6 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>NSMotionUsageDescription</key>
-	<string>We need this to demonstrate the PSLocation service.</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>We need this to demonstrate the PSLocation service.</string>
-	<key>NSLocationAlwaysUsageDescription - 2</key>
-	<string>We need this to demonstrate the PSLocation service.</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>We need this to demonstrate the PSLocation service.</string>
 </dict>
 </plist>

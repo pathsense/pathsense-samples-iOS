@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gxe-xt-8ij">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="LEX-s6-xCN">
+                                <rect key="frame" x="0.0" y="44" width="375" height="623"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="Jff-uY-TRB"/>
+                                </connections>
+                            </mapView>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" id="mQ3-c2-3DK" customClass="ScrubberView">
+                                <rect key="frame" x="-1" y="539" width="377" height="64"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="fTX-ss-olq">
+                                    <rect key="frame" x="0.0" y="0.0" width="377" height="64"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="L7W-S7-qcB">
+                                            <rect key="frame" x="9" y="37" width="25" height="25"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" image="lt_arrow"/>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="tbc-zn-maI">
+                                            <rect key="frame" x="343" y="38" width="25" height="25"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" image="rt_arrow"/>
+                                        </button>
+                                    </subviews>
+                                </view>
+                                <blurEffect style="light"/>
+                                <connections>
+                                    <outlet property="leftButton" destination="L7W-S7-qcB" id="U3r-n4-Qzb"/>
+                                    <outlet property="rightButton" destination="tbc-zn-maI" id="Zku-1g-cGK"/>
+                                </connections>
+                            </visualEffectView>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" id="cRo-s4-CBA" customClass="ScrubberView">
+                                <rect key="frame" x="-1" y="603" width="377" height="64"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="b5e-tg-FI9">
+                                    <rect key="frame" x="0.0" y="0.0" width="377" height="64"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="hin-o8-Nmb">
+                                            <rect key="frame" x="9" y="37" width="25" height="25"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" image="lt_arrow"/>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="OsD-k5-yQy">
+                                            <rect key="frame" x="343" y="38" width="25" height="25"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" image="rt_arrow"/>
+                                        </button>
+                                    </subviews>
+                                </view>
+                                <blurEffect style="light"/>
+                                <connections>
+                                    <outlet property="leftButton" destination="hin-o8-Nmb" id="gdz-cU-vOq"/>
+                                    <outlet property="rightButton" destination="OsD-k5-yQy" id="Yew-x2-LUA"/>
+                                </connections>
+                            </visualEffectView>
+                            <navigationBar contentMode="scaleToFill" id="7vN-ZI-dQo">
+                                <rect key="frame" x="1" y="0.0" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="PSLocation Ambient Sample" id="cF0-Jx-h0Y">
+                                        <barButtonItem key="leftBarButtonItem" image="LocationIcon" id="hVA-70-Z0r">
+                                            <connections>
+                                                <action selector="handleLocationButton:" destination="BYZ-38-t0r" id="9Ea-DE-icV"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" image="gear" id="b8G-X2-YIf">
+                                            <connections>
+                                                <action selector="handleSettingsButton:" destination="BYZ-38-t0r" id="FEo-GP-DFA"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="HI0-eg-xGm"/>
+                                </connections>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </view>
+                    <connections>
+                        <outlet property="fromScrubberView" destination="mQ3-c2-3DK" id="P5J-we-QTM"/>
+                        <outlet property="mapView" destination="LEX-s6-xCN" id="XWL-gi-KPj"/>
+                        <outlet property="navigationBar" destination="7vN-ZI-dQo" id="fdY-jp-otE"/>
+                        <outlet property="toScrubberView" destination="cRo-s4-CBA" id="mg2-k1-pH1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="683.33333333333337" y="416.18303571428572"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="LocationIcon" width="28.5" height="35"/>
+        <image name="gear" width="26" height="26"/>
+        <image name="lt_arrow" width="25" height="25"/>
+        <image name="rt_arrow" width="25" height="25"/>
+    </resources>
+</document>

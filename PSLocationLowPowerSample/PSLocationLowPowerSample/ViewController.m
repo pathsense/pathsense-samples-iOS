@@ -22,7 +22,6 @@
 @interface ViewController () <PSLocationManagerDelegate>
 
 @property (nonatomic, readwrite) IBOutlet PSMapView *mapView;
-@property (nonatomic, weak) IBOutlet UINavigationBar *navigationBar;
 @property (nonatomic, readwrite) UserLocationAnnotation *userLocationAnnotation;
 @property (nonatomic, strong) DataOverlay *dataOverlay;
 @property (nonatomic, readonly) PSLocationManager *locationManager;
@@ -66,33 +65,9 @@
     [_mapView addAnnotation:_userLocationAnnotation];
 }
 //----------------------------------------------------------------------------------
-- (void)viewDidLayoutSubviews
-{
-    [super viewDidLayoutSubviews];
-    
-    CGRect bounds;
-    if (@available(iOS 11.0, *)) {
-        bounds = [[[self view] safeAreaLayoutGuide] layoutFrame];
-    } else {
-        bounds = [[self view] bounds];
-        bounds.origin.y = [[UIApplication sharedApplication] statusBarFrame].size.height;
-        bounds.size.height -= bounds.origin.y;
-    }
-    CGRect r = bounds;
-
-    CGRect nr = [_navigationBar frame];
-    nr.origin.y = r.origin.y;
-    [_navigationBar setFrame:nr];
-    
-    CGRect mr = [_mapView frame];
-    mr.origin.y = nr.origin.y + nr.size.height;
-    mr.size.height = [[self view] bounds].size.height - mr.origin.y;
-    [_mapView setFrame:mr];
-}
-//----------------------------------------------------------------------------------
 - (BOOL)prefersStatusBarHidden
 {
-    return NO;
+	return YES;
 }
 //----------------------------------------------------------------------------------
 - (IBAction)handleLocationButton:(id)sender
@@ -128,7 +103,7 @@
     }
     
     dispatch_once(&onceToken, ^{
-        [_mapView setCenterCoordinate:[location coordinate] zoomLevel:18 animated:NO];
+		[self->_mapView setCenterCoordinate:[location coordinate] zoomLevel:18 animated:NO];
     });
     
 	[self animateUserLocation:location];
@@ -146,10 +121,10 @@
     [UIView animateWithDuration:.1
         animations:^{
             if (course!=-1) {
-                MKMapCamera *camera = [_mapView camera];
+				MKMapCamera *camera = [self->_mapView camera];
                 [view setTransform:CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(course-camera.heading))];
             }
-            [_userLocationAnnotation setCoordinate:[location coordinate]];
+			[self->_userLocationAnnotation setCoordinate:[location coordinate]];
         } completion:^(BOOL finished) { }
     ];
 }
@@ -164,15 +139,6 @@
         }
         [[_mapView rendererForOverlay:_dataOverlay] setNeedsDisplay];
     }
-}
-
-#pragma mark -
-#pragma mark - UINavigationBarDelegate
-#pragma mark -
-//----------------------------------------------------------------------------------
-- (UIBarPosition)positionForBar:(id<UIBarPositioning>)bar
-{
-    return UIBarPositionTopAttached;
 }
 
 #pragma mark -
