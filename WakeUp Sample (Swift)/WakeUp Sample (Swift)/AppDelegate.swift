@@ -15,10 +15,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     //----------------------------------------------------------------------------------
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool
     {
         // Override point for customization after application launch.
-        // TODO: Add your api key & client ID here.
+    	#warning("Add your api key & client ID here")
         PSLocation.setApiKey("your api key here", andClientID: "your client ID")
 
         if ((launchOptions?.index(forKey:.location)) != nil) {

@@ -33,30 +33,6 @@
     [barButtonItem setEnabled:NO];
 }
 //----------------------------------------------------------------------------------
-- (void)viewDidLayoutSubviews
-{
-    [super viewDidLayoutSubviews];
-    
-    CGRect bounds;
-    if (@available(iOS 11.0, *)) {
-        bounds = [[[self view] safeAreaLayoutGuide] layoutFrame];
-    } else {
-        bounds = [[self view] bounds];
-        bounds.origin.y = [[UIApplication sharedApplication] statusBarFrame].size.height;
-        bounds.size.height -= bounds.origin.y;
-    }
-    CGRect r = bounds;
-
-    CGRect nr = [_navigationBar frame];
-    nr.origin.y = r.origin.y;
-    [_navigationBar setFrame:nr];
-    
-    CGRect mr = [_mapView frame];
-    mr.origin.y = nr.origin.y + nr.size.height;
-    mr.size.height = [[self view] bounds].size.height - mr.origin.y;
-    [_mapView setFrame:mr];
-}
-//----------------------------------------------------------------------------------
 - (void)handleButton:(id)sender
 {
 	#warning set the location you want to monitor departures for here
@@ -116,28 +92,23 @@
     } else {
     }
 }
-//----------------------------------------------------------------------------------
--(void)locationManager:(PSLocationManager *)manager didUpdateLocations:(NSArray *)locations
-{
-    // some of these locations may be stale so you will need to filter them as you want
-    
-    for (CLLocation *location in locations) {
-        MKPointAnnotation *pt = [MKPointAnnotation new];
-        [pt setTitle:@"Departure"];
-        [pt setCoordinate:[location coordinate]];
-        [_mapView addAnnotation:pt]; // this does not persist between runs of the app
-        [_mapView setCenterCoordinate:[location coordinate]]; // this does not persist between runs of the app
-    }
-}
+////----------------------------------------------------------------------------------
+//-(void)locationManager:(PSLocationManager *)manager didUpdateLocations:(NSArray *)locations
+//{
+//    // some of these locations may be stale so you will need to filter them as you want
+//
+//    for (CLLocation *location in locations) {
+//        MKPointAnnotation *pt = [MKPointAnnotation new];
+//        [pt setTitle:@"Departure"];
+//        [pt setCoordinate:[location coordinate]];
+//        [_mapView addAnnotation:pt]; // this does not persist between runs of the app
+//    }
+//}
 //----------------------------------------------------------------------------------
 - (void)psLocationManager:(PSLocationManager *)manager didUpdateDepartureCoordinate:(CLLocationCoordinate2D)coordinate
 {
 	// this will be called whenever you call setDepartureCoordinate
-    
-    if (_preparingMap) {
-    	return;
-    }
-    
+
     [_mapView removeAnnotations:[_mapView annotations]];
     MKPointAnnotation *pt = [MKPointAnnotation new];
     [pt setTitle:@"SetLocation"];
@@ -147,13 +118,21 @@
     MKCoordinateSpan span = MKCoordinateSpanMake(0, 360/pow(2, 16)*[_mapView frame].size.width/256);
     [_mapView setRegion:MKCoordinateRegionMake(coordinate, span) animated:YES];
 }
+////----------------------------------------------------------------------------------
+//- (void)psLocationManager:(PSLocationManager *)manager didDepartCoordinate:(CLLocationCoordinate2D)coordinate
+//{
+//    // this will be called when a departure is detected -- at this point you need to start getting locations
+//    // the coordinate passed in will be the coordinate that was passed to setDepartureCoordinate
+//
+//    [manager requestLocation];
+//}
 //----------------------------------------------------------------------------------
-- (void)psLocationManager:(PSLocationManager *)manager didDepartCoordinate:(CLLocationCoordinate2D)coordinate
+- (void)psLocationManager:(PSLocationManager *)manager didDepartCoordinate:(CLLocationCoordinate2D)coordinate atLocation:(CLLocation *)location
 {
-    // this will be called when a departure is detected -- at this point you need to start getting locations
-    // the coordinate passed in will be the coordinate that was passed to setDepartureCoordinate
-	
-    [manager requestLocation];
+	MKPointAnnotation *pt = [MKPointAnnotation new];
+	[pt setTitle:@"Departure"];
+	[pt setCoordinate:[location coordinate]];
+	[_mapView addAnnotation:pt]; // this does not persist between runs of the app
 }
 //----------------------------------------------------------------------------------
 - (void)psLocationManagerDepartureMonitoringEnded:(PSLocationManager *)manager

@@ -12,10 +12,8 @@ import PSLocation
 
 class ViewController: UIViewController, UINavigationBarDelegate, PSLocationManagerDelegate, MKMapViewDelegate
 {
-
 	var preparingMap = true
-	var locationManager : PSLocationManager?
-    
+	var locationManager : PSLocationManager? = nil
 	@IBOutlet weak var mapView : MKMapView?
 	@IBOutlet weak var navigationBar : UINavigationBar?
 
@@ -30,49 +28,24 @@ class ViewController: UIViewController, UINavigationBarDelegate, PSLocationManag
         navigationBar?.topItem?.leftBarButtonItem = barButtonItem
         barButtonItem.isEnabled = false
     }
-    //----------------------------------------------------------------------------------
-    override func viewDidLayoutSubviews()
-    {
-    	super.viewDidLayoutSubviews()
-        
-    	var bounds: CGRect
-    	if #available(iOS 11.0, *) {
-     		bounds = self.view.safeAreaLayoutGuide.layoutFrame
-        } else {
-        	bounds = self.view.bounds
-         	bounds.origin.y = UIApplication.shared.statusBarFrame.size.height
-          	bounds.size.height -= bounds.origin.y
-        }
-		
-  		let r = bounds
-    	
-        var nr = navigationBar?.frame
-		nr?.origin.y = r.origin.y
-        navigationBar?.frame = nr!
-      
-        var mr = mapView?.frame
-        let y = (nr?.origin.y)! + (nr?.size.height)!
-        mr?.size.height = self.view.bounds.size.height - y
-        mr?.origin.y = y
-        mapView?.frame = mr!
-    }
-
+    
     // MARK: -
     //----------------------------------------------------------------------------------
     func startLocationManager()
     {
-    	if (locationManager == nil) {
-        	locationManager = PSLocationManager.init()
-            locationManager?.setDelegate(self)
-            locationManager?.requestAlwaysAuthorization()
-            locationManager?.allowsBackgroundLocationUpdates = true
-            locationManager?.startMonitoringDeparture()
+    	if self.locationManager == nil {
+        	let locationManager = PSLocationManager()
+            locationManager.setDelegate(self)
+            locationManager.requestAlwaysAuthorization()
+            locationManager.allowsBackgroundLocationUpdates = true
+            locationManager.startMonitoringDeparture()
+            self.locationManager = locationManager
         }
     }
     //----------------------------------------------------------------------------------
-    @objc func handleButton(sender : UIBarButtonItem)
+	@objc func handleButton(sender : UIBarButtonItem)
     {
-        // FIXME: Set the location you want to monitor departures for here.
+    	#warning("Set the location you want to monitor departures for here")
     	locationManager?.setDepartureCoordinate(CLLocationCoordinate2DMake(33.02280304, -117.28318958))
     }
     
@@ -99,10 +72,9 @@ class ViewController: UIViewController, UINavigationBarDelegate, PSLocationManag
             alertController.addAction(UIAlertAction.init(title: NSLocalizedString("OK", comment: ""), style: .cancel, handler: nil))
             
             let action = UIAlertAction.init(title: NSLocalizedString("Settings...", comment: ""), style: .default, handler: { (UIAlertAction) in
-				if let url = URL.init(string: UIApplicationOpenSettingsURLString) {
-                    UIApplication.shared.open(url, options: [:], completionHandler: { (Bool) in
-                	})
-                }
+				let url = NSURL.init(string: UIApplication.openSettingsURLString)! as URL
+                UIApplication.shared.open(url, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: { (Bool) in
+                })
             })
             alertController.addAction(action)
             present(alertController, animated: true, completion: {
@@ -113,42 +85,48 @@ class ViewController: UIViewController, UINavigationBarDelegate, PSLocationManag
         }
 	}
     //----------------------------------------------------------------------------------
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
-    {
-		// some of these locations may be stale so you will need to filter them as you want
-    	
-        for location in locations {
-        	let pt = MKPointAnnotation.init()
-            pt.title = "Departure"
-            pt.coordinate = location.coordinate
-            mapView?.addAnnotation(pt)
-        }
-    }
+//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
+//    {
+//		// some of these locations may be stale so you will need to filter them as you want
+//
+//        for location in locations {
+//        	let pt = MKPointAnnotation.init()
+//            pt.title = "Departure"
+//            pt.coordinate = location.coordinate
+//            mapView?.addAnnotation(pt)
+//        }
+//    }
     //----------------------------------------------------------------------------------
     func psLocationManager(_ manager: PSLocationManager!, didUpdateDepartureCoordinate coordinate: CLLocationCoordinate2D)
     {
 		// this will be called whenever you call setDepartureCoordinate
+		
+		guard let mapView = mapView else { return }
 
-		if preparingMap {
-  			return
-  		}
-  		
-    	mapView?.removeAnnotations((mapView?.annotations)!)
+    	mapView.removeAnnotations(mapView.annotations)
         let pt = MKPointAnnotation.init()
         pt.title = "SetLocation"
         pt.coordinate = coordinate
-        mapView?.addAnnotation(pt)
+        mapView.addAnnotation(pt)
         
-        let span = MKCoordinateSpanMake(0, (360.0/pow(2.0, 16.0)) * (Double((mapView?.frame.size.width)!)/256.0))
-        mapView?.setRegion(MKCoordinateRegion.init(center: coordinate, span: span), animated:true)
+        let span = MKCoordinateSpan.init(latitudeDelta: 0, longitudeDelta: (360.0/pow(2.0, 16.0)) * (Double(mapView.frame.size.width)/256.0))
+        mapView.setRegion(MKCoordinateRegion.init(center: coordinate, span: span), animated:true)
 	}
+//    //----------------------------------------------------------------------------------
+//    func psLocationManager(_ manager: PSLocationManager!, didDepart coordinate: CLLocationCoordinate2D)
+//    {
+//		// this will be called when a departure is detected -- at this point you need to start getting locations
+//    	// the coordinate passed in will be the coordinate that was passed to setDepartureCoordinate
+//
+//        manager.requestLocation()
+//    }
     //----------------------------------------------------------------------------------
-    func psLocationManager(_ manager: PSLocationManager!, didDepart coordinate: CLLocationCoordinate2D)
+    func psLocationManager(_ manager: PSLocationManager!, didDepart coordinate: CLLocationCoordinate2D, at location: CLLocation!)
     {
-		// this will be called when a departure is detected -- at this point you need to start getting locations
-    	// the coordinate passed in will be the coordinate that was passed to setDepartureCoordinate
-		
-        manager.requestLocation()
+		let pt = MKPointAnnotation.init()
+		pt.title = "Departure"
+		pt.coordinate = location.coordinate
+		mapView?.addAnnotation(pt)
     }
     //----------------------------------------------------------------------------------
     func psLocationManagerDepartureMonitoringEnded(_ manager: PSLocationManager!)
@@ -161,27 +139,31 @@ class ViewController: UIViewController, UINavigationBarDelegate, PSLocationManag
     //----------------------------------------------------------------------------------
     func mapViewDidFinishLoadingMap(_ mapView: MKMapView)
     {
-		if preparingMap {
-        	navigationBar?.topItem?.leftBarButtonItem?.isEnabled = true
-        }
+    	guard preparingMap else { return }
+		
+		navigationBar?.topItem?.leftBarButtonItem?.isEnabled = true
         preparingMap = false
 	}
     //----------------------------------------------------------------------------------
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView?
     {
-    	var result : MKAnnotationView!
+    	var result : MKAnnotationView? = nil
         
-		if annotation is MKPointAnnotation {
-        	if ((annotation.title)! == "SetLocation") {
-            	result = MKPinAnnotationView.init()
-                result.tintColor = MKPinAnnotationView.redPinColor()
-            } else if ((annotation.title)! == "Departure") {
-            	result = MKPinAnnotationView.init()
-                result.tintColor = MKPinAnnotationView.greenPinColor()
+		if let annotation = annotation as? MKPointAnnotation {
+        	if annotation.title == "SetLocation" {
+            	result = MKPinAnnotationView()
+                result?.tintColor = MKPinAnnotationView.redPinColor()
+           	} else if annotation.title == "Departure" {
+            	result = MKPinAnnotationView()
+                result?.tintColor = MKPinAnnotationView.greenPinColor()
             }
         }
-        
         return result
 	}
 }
 
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
+}
