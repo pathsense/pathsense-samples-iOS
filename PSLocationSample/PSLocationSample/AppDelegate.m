@@ -5,7 +5,7 @@
 //  Created by Paul Schmitt on 10/9/15.
 //  Copyright © 2015 PathSense. All rights reserved.
 //
-#import <PSLocation/PSlocation.h>
+#import <PSLocation/PSLocation.h>
 
 #import "AppDelegate.h"
 #import "ViewController.h"

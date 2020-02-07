@@ -6,7 +6,7 @@
 //  Copyright © 2015 PathSense. All rights reserved.
 //
 
-#import <PSLocation/PSlocation.h>
+#import <PSLocation/PSLocation.h>
 #import <UIKit/UIKit.h>
 
 #import "DataOverlay.h"
