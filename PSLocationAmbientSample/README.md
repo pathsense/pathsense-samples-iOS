@@ -66,10 +66,11 @@
 3. The delegate method **psLocationManager:didUpdateLocations:** will be the callback method to recieve the location updates.
 
 4. Also in AppDelegate delegate method **application:didFinishLaunchingWithOptions:** the launchOptions are checked to see if we launched because of a location event **UIApplicationLaunchOptionsLocationKey**. If we were then wemake sure we start monitoring locations immeadiatly (see **ObservationManager:locationLaunch**).
-```groovy
+    
+    ```groovy
     ObservationManager *manager = [ObservationManager instance];
     if ([launchOptions objectForKey:UIApplicationLaunchOptionsLocationKey]) {
         //Code to handle the location update
         [manager locationLaunch:application];
     }
-```
+	```
