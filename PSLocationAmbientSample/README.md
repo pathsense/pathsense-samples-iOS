@@ -47,19 +47,19 @@
 2. Even though the **PSLocationManager** is set up, we do not start monitoring locations until we know we have obtained the correct user permissions.
     
     ```groovy
-	- (void)locationManager:(PSLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
-	{
-    		if (status == kCLAuthorizationStatusNotDetermined) {
-        
-   		} else if (status == kCLAuthorizationStatusRestricted || status == kCLAuthorizationStatusDenied) {
-        
-    		} else if (status == kCLAuthorizationStatusAuthorizedAlways) {
-        		[manager startMonitoringAmbientLocationChanges];
-        
-    		} else if (status == kCLAuthorizationStatusAuthorizedWhenInUse) {
-    
-    		}
-	}
+    - (void)locationManager:(PSLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
+    {
+        if (status == kCLAuthorizationStatusNotDetermined) {
+            
+        } else if (status == kCLAuthorizationStatusRestricted || status == kCLAuthorizationStatusDenied) {
+            
+        } else if (status == kCLAuthorizationStatusAuthorizedAlways) {
+            [manager startMonitoringAmbientLocationChanges];
+            
+        } else if (status == kCLAuthorizationStatusAuthorizedWhenInUse) {
+
+        }
+    }
 	```
 
     
