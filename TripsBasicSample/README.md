@@ -40,8 +40,9 @@
     if (launchOptions?.index(forKey:.location)) != nil {
         locationManager?.tripsLaunch(viaOS: application)
     }
-	```
-    2. In the **LocationManager** delegate function **locationManager:didChangeAuthorization** is where we call **startMonitoringTrips**
+    ```
+
+2. In the **LocationManager** delegate function **locationManager:didChangeAuthorization** is where we call **startMonitoringTrips**
 
     ```groovy
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
