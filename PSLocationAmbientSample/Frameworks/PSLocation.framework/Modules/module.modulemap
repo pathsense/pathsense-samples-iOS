@@ -1,6 +1,0 @@
-framework module PSLocation {
-  umbrella header "PSLocation.h"
-
-  export *
-  module * { export * }
-}
