@@ -21,9 +21,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     	#warning("Add your api key & client ID here")
         PSLocation.setApiKey("your api key here", andClientID: "your client ID")
 
-        if ((launchOptions?.index(forKey:.location)) != nil) {
-        	let vc = window?.rootViewController as? ViewController
-            vc?.startLocationManager()
+        if (launchOptions?.index(forKey:.location)) != nil {
+            if let vc = window?.rootViewController as? ViewController {
+                vc.startLocationManager()
+            }
         }
         
         return true
@@ -55,7 +56,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
-
 }
 

@@ -12,8 +12,9 @@ import PSLocation
 
 class ViewController: UIViewController, UINavigationBarDelegate, PSLocationManagerDelegate, MKMapViewDelegate
 {
-	var preparingMap = true
-	var locationManager : PSLocationManager? = nil
+	private var preparingMap = true
+	private var locationManager : PSLocationManager? = nil
+    
 	@IBOutlet weak var mapView : MKMapView?
 	@IBOutlet weak var navigationBar : UINavigationBar?
 
@@ -33,14 +34,15 @@ class ViewController: UIViewController, UINavigationBarDelegate, PSLocationManag
     //----------------------------------------------------------------------------------
     func startLocationManager()
     {
-    	if self.locationManager == nil {
-        	let locationManager = PSLocationManager()
-            locationManager.setDelegate(self)
-            locationManager.requestAlwaysAuthorization()
-            locationManager.allowsBackgroundLocationUpdates = true
-            locationManager.startMonitoringDeparture()
-            self.locationManager = locationManager
+        guard self.locationManager == nil else {
+            return
         }
+        let locationManager = PSLocationManager()
+        locationManager.setDelegate(self)
+        locationManager.requestAlwaysAuthorization()
+        locationManager.allowsBackgroundLocationUpdates = true
+        locationManager.startMonitoringDeparture()
+        self.locationManager = locationManager
     }
     //----------------------------------------------------------------------------------
 	@objc func handleButton(sender : UIBarButtonItem)
@@ -62,46 +64,33 @@ class ViewController: UIViewController, UINavigationBarDelegate, PSLocationManag
     //----------------------------------------------------------------------------------
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus)
     {
-    	if (status == .notDetermined) {
+    	if status == .notDetermined {
         
-        } else if (status == .restricted || status == .denied) {
-        	let title = NSLocalizedString("Location Autorization", comment: "")
-        	let message = NSLocalizedString("This application is not authorized to use location services!", comment: "")
+        } else if status == .restricted || status == .denied {
         	
-            let alertController = UIAlertController.init(title: title, message: message, preferredStyle: .alert)
-            alertController.addAction(UIAlertAction.init(title: NSLocalizedString("OK", comment: ""), style: .cancel, handler: nil))
+            let alertController = UIAlertController(title: "Location Autorization", message: "This application is not authorized to use location services!", preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
             
-            let action = UIAlertAction.init(title: NSLocalizedString("Settings...", comment: ""), style: .default, handler: { (UIAlertAction) in
-				let url = NSURL.init(string: UIApplication.openSettingsURLString)! as URL
-                UIApplication.shared.open(url, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: { (Bool) in
-                })
+            let action = UIAlertAction(title: "Settings...", style: .default, handler: { (UIAlertAction) in
+                if let url = URL(string: UIApplication.openSettingsURLString) {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                }
             })
             alertController.addAction(action)
-            present(alertController, animated: true, completion: {
-            })
+            present(alertController, animated: true, completion: nil)
             
         } else {
         
         }
 	}
     //----------------------------------------------------------------------------------
-//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
-//    {
-//		// some of these locations may be stale so you will need to filter them as you want
-//
-//        for location in locations {
-//        	let pt = MKPointAnnotation.init()
-//            pt.title = "Departure"
-//            pt.coordinate = location.coordinate
-//            mapView?.addAnnotation(pt)
-//        }
-//    }
-    //----------------------------------------------------------------------------------
     func psLocationManager(_ manager: PSLocationManager!, didUpdateDepartureCoordinate coordinate: CLLocationCoordinate2D)
     {
 		// this will be called whenever you call setDepartureCoordinate
 		
-		guard let mapView = mapView else { return }
+		guard let mapView = mapView else {
+            return
+        }
 
     	mapView.removeAnnotations(mapView.annotations)
         let pt = MKPointAnnotation.init()
@@ -112,14 +101,6 @@ class ViewController: UIViewController, UINavigationBarDelegate, PSLocationManag
         let span = MKCoordinateSpan.init(latitudeDelta: 0, longitudeDelta: (360.0/pow(2.0, 16.0)) * (Double(mapView.frame.size.width)/256.0))
         mapView.setRegion(MKCoordinateRegion.init(center: coordinate, span: span), animated:true)
 	}
-//    //----------------------------------------------------------------------------------
-//    func psLocationManager(_ manager: PSLocationManager!, didDepart coordinate: CLLocationCoordinate2D)
-//    {
-//		// this will be called when a departure is detected -- at this point you need to start getting locations
-//    	// the coordinate passed in will be the coordinate that was passed to setDepartureCoordinate
-//
-//        manager.requestLocation()
-//    }
     //----------------------------------------------------------------------------------
     func psLocationManager(_ manager: PSLocationManager!, didDepart coordinate: CLLocationCoordinate2D, at location: CLLocation!)
     {
@@ -139,7 +120,9 @@ class ViewController: UIViewController, UINavigationBarDelegate, PSLocationManag
     //----------------------------------------------------------------------------------
     func mapViewDidFinishLoadingMap(_ mapView: MKMapView)
     {
-    	guard preparingMap else { return }
+    	guard preparingMap else {
+            return
+        }
 		
 		navigationBar?.topItem?.leftBarButtonItem?.isEnabled = true
         preparingMap = false
@@ -149,21 +132,18 @@ class ViewController: UIViewController, UINavigationBarDelegate, PSLocationManag
     {
     	var result : MKAnnotationView? = nil
         
-		if let annotation = annotation as? MKPointAnnotation {
-        	if annotation.title == "SetLocation" {
-            	result = MKPinAnnotationView()
-                result?.tintColor = MKPinAnnotationView.redPinColor()
-           	} else if annotation.title == "Departure" {
-            	result = MKPinAnnotationView()
-                result?.tintColor = MKPinAnnotationView.greenPinColor()
-            }
+        guard let annotation = annotation as? MKPointAnnotation else {
+            return result
         }
+        
+        if annotation.title == "SetLocation" {
+            result = MKPinAnnotationView()
+            result?.tintColor = MKPinAnnotationView.redPinColor()
+        } else if annotation.title == "Departure" {
+            result = MKPinAnnotationView()
+            result?.tintColor = MKPinAnnotationView.greenPinColor()
+        }
+
         return result
 	}
-}
-
-
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
-	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
 }
