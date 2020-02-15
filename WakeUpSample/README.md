@@ -1,4 +1,4 @@
-# Setup for WakeUp Sample (Swift)
+# Setup for WakeUp Sample
 
 1. Obtain a **Pathsense SDK Client ID** and **API Key** from [here](https://pathsense.com/). Click “GET STARTED” and enter your email address.
 

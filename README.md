@@ -9,7 +9,8 @@ You can see the additional information for each sample in their respective READM
   - [PSLocation Ambient Sample (Obj-C)](PSLocationAmbientSample/README.md)
   - [WakeUp Sample (Obj-C)](WakeUpSampleObj-C/README.md)
   - [WakeUp Sample (Swift)](WakeUpSample/README.md)
-
+  - [TripsBasicSample (Swift)](TripsBasicSample/README.md)
+  
 # Enabling PSLocation in Your App
 
 1. Obtain a **Pathsense SDK Client ID** and **API Key** from [here](https://pathsense.com/). Click “GET STARTED” and enter your email address.
