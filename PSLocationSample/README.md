@@ -36,7 +36,7 @@
 
 # App Details to Note
 
-1. In **viewDidLoad:** we set up the [PSLocationManager](https://docs.pathsense.io/ios/html/interface_p_s_location_manager.html):
+1. In **viewDidLoad:** we set up the [PSLocationManager](http://docs.pathsense.io/ios/html/interface_p_s_location_manager.html):
 
     ```objective-c
     _locationManager = [PSLocationManager new];
@@ -45,7 +45,7 @@
     [_locationManager setPausesLocationUpdatesAutomatically:NO];
     ```
 
-2. We respond to **psLocationManager:desiredAccuracyForActivity:withConfidence:** — a method unique to the [PSLocationManagerDelegate](https://docs.pathsense.io/ios/html/protocol_p_s_location_manager_delegate-p.html).  
+2. We respond to **psLocationManager:desiredAccuracyForActivity:withConfidence:** — a method unique to the [PSLocationManagerDelegate](http://docs.pathsense.io/ios/html/protocol_p_s_location_manager_delegate-p.html).  
    From here we check the detected activity and adjust `desiredAccuracy` accordingly:
 
     ```objective-c

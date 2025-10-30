@@ -3,7 +3,7 @@
 A collection of sample applications demonstrating how to use the **PathSense iOS SDK v1.5.1**.
 
 For more information, refer to the **latest documentation**:  
-👉 [https://docs.pathsense.io/ios/html/](https://docs.pathsense.io/ios/html/)  
+👉 [https://docs.pathsense.io/ios/html/](http://docs.pathsense.io/ios/html/)  
 or visit the [PathSense website](https://pathsense.com/).
 
 > The legacy developer portal (`developer.pathsense.com`) is no longer active.

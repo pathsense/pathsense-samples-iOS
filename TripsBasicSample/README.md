@@ -36,7 +36,7 @@
 
 # App Details to Note
 
-1. In **application(_:didFinishLaunchingWithOptions:)**, we configure the [PSLocationManager](https://docs.pathsense.io/ios/html/interface_p_s_location_manager.html):
+1. In **application(_:didFinishLaunchingWithOptions:)**, we configure the [PSLocationManager](http://docs.pathsense.io/ios/html/interface_p_s_location_manager.html):
 
     ```swift
     locationManager = PSLocationManager()
