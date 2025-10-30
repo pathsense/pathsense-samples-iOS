@@ -1,62 +1,89 @@
-# Pathsense Samples for iOS
+# PathSense Samples for iOS
 
-A collection of sample applications demonstrating how to use the Pathsense iOS SDK. For more information, take a look at the [documentation](https://developer.pathsense.com/documentation) or connect with us on our [website](https://pathsense.com/) or [developer portal](https://developer.pathsense.com/).
+A collection of sample applications demonstrating how to use the **PathSense iOS SDK v1.5.1**.
 
-You can see the additional information for each sample in their respective README files.
+For more information, refer to the **latest documentation**:  
+👉 [https://docs.pathsense.io/ios/html/](https://docs.pathsense.io/ios/html/)  
+or visit the [PathSense website](https://pathsense.com/).
 
-  - [PSLocation Sample (Obj-C)](PSLocationSample/README.md)
-  - [PSLocation LowPower Sample (Obj-C)](PSLocationLowPowerSample/README.md)
-  - [PSLocation Ambient Sample (Obj-C)](PSLocationAmbientSample/README.md)
-  - [WakeUp Sample (Obj-C)](WakeUpSampleObj-C/README.md)
-  - [WakeUp Sample (Swift)](WakeUpSample/README.md)
-  - [TripsBasicSample (Swift)](TripsBasicSample/README.md)
-  
+> The legacy developer portal (`developer.pathsense.com`) is no longer active.
+
+You can find additional details for each sample in their respective README files:
+
+  - [PSLocation Sample (Obj-C)](PSLocationSample/README.md)  
+  - [PSLocation LowPower Sample (Obj-C)](PSLocationLowPowerSample/README.md)  
+  - [PSLocation Ambient Sample (Obj-C)](PSLocationAmbientSample/README.md)  
+  - [WakeUp Sample (Obj-C)](WakeUpSampleObj-C/README.md)  
+  - [WakeUp Sample (Swift)](WakeUpSample/README.md)  
+  - [Trips Basic Sample (Swift)](TripsBasicSample/README.md)
+
+---
+
 # Enabling PSLocation in Your App
 
-1. Obtain a **Pathsense SDK Client ID** and **API Key** from [here](https://pathsense.com/). Click “GET STARTED” and enter your email address.
+1. **Obtain credentials**  
+   Contact [PathSense](https://pathsense.com/) to request your **Client ID** and **API Key** for the iOS SDK v1.5.1.  
+   > The old “GET STARTED” flow is no longer active — credentials are issued privately.
 
-2. Make sure you are using the latest version of Xcode (10.0+) and targeting iOS 9.0 or higher.
+2. **Project requirements**  
+   - Xcode 16 or newer  
+   - iOS 14.0 or later  
+   - Swift 5.9 or Objective-C  
 
-3. Add the PSLocation.framework to your Xcode project (This framework needs to be added to the Embedded Binaries as well).
+3. **Add the framework**  
+   Add **PSLocation.xcframework** (or **PSLocation.framework**) to your Xcode project.  
+   Make sure it is listed under **Frameworks, Libraries and Embedded Content** and set to **Embed & Sign**.
 
-![Screenshot1](frameworks.png?raw=true "")
+   ![Screenshot1](frameworks.png?raw=true "")
 
-4. Under the Build Phases tab in your Target, click the + button on the top left and then select New Run Script Phase. Then setup the build phase as follows. Make sure this phase is below the Embed Frameworks phase:
+4. **Add a Run Script build phase**  
+   In **Build Phases** of your target, click ➕ → **New Run Script Phase** and configure it as shown below.  
+   Make sure this phase appears *below* **Embed Frameworks**.
 
-![Screenshot2](RunScript.png?raw=true "")
+   ![Screenshot2](RunScript.png?raw=true "")
+
+---
 
 # Using Objective-C
 
-1. In your AppDelegate add the following code to your **application:didFinishLaunchingWithOptions:**
+1. In your **AppDelegate**, add the following to  
+   `application:didFinishLaunchingWithOptions:`:
 
-    ```groovy
-	- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-	{
-		[PSLocation setApiKey:@"your api key here" andClientID:@"your client ID"];
-    	return YES;
-	}
-	```
+    ```objective-c
+    - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+    {
+        [PSLocation setApiKey:@"YOUR_API_KEY" andClientID:@"YOUR_CLIENT_ID"];
+        return YES;
+    }
+    ```
 
-2. Make sure to include PSLocation framework headers in your AppDelegate.h file:
+2. Import the PSLocation framework header in **AppDelegate.h**:
 
-    ```groovy
-	#import <PSLocation/PSLocation.h>
-	```
+    ```objective-c
+    #import <PSLocation/PSLocation.h>
+    ```
+
+---
 
 # Using Swift
 
-1. In your AppDelegate add the following code to your **application(_:didFinishLaunchingWithOptions:)**
+1. In your **AppDelegate**, add the following to  
+   `application(_:didFinishLaunchingWithOptions:)`:
 
-    ```groovy
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool
-    {
-        PSLocation.setApiKey("your api key here", andClientID: "your client ID")
+    ```swift
+    func application(_ application: UIApplication,
+                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        PSLocation.setApiKey("YOUR_API_KEY", andClientID: "YOUR_CLIENT_ID")
         return true
     }
-	```
-2. Make sure to include PSLocation framework in your AppDelegate file:
+    ```
 
-    ```groovy
-	import PSLocation
-	```
+2. Import the PSLocation framework:
 
+    ```swift
+    import PSLocation
+    ```
+
+---
+
+© PathSense Inc. — Updated for SDK v1.5.1 / Xcode 16 / iOS 18
